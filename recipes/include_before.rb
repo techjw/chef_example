@@ -7,7 +7,7 @@
 new_example_dirs = [
   { name: 'app0', type: 'java', base: '/data' },
   { name: 'app1', type: 'tomcat', base: '/data' },
-  { name: 'app2', type: 'docker', base: '/data' },
+  { name: 'app2', type: 'docker', base: '/data' }
 ]
 
 # Roles have a higher precendence for attribute values
