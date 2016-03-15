@@ -1,0 +1,19 @@
+{
+  "name": "app_zero",
+  "description": "Test roles used by test-kitchen",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "run_list": [
+    "recipe[chef_example::default]"
+  ],
+  "default_attributes": {
+    "chef_example": {
+      "lwrp_dirs": [
+        { "name": "app4", "type": "web", "base": "/data" },
+        { "name": "app5", "type": "docker", "base": "/data" }
+      ]
+    }
+  }
+
+
+}

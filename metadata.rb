@@ -1,0 +1,7 @@
+name 'chef_example'
+maintainer 'James Walton'
+maintainer_email 'jfwalton@gmail.com'
+license 'all_rights'
+description 'Installs/Configures chef_example'
+long_description 'Installs/Configures chef_example'
+version '0.1.0'
