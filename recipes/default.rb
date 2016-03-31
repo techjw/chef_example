@@ -11,3 +11,9 @@ node[:chef_example][:lwrp_dirs].each do |app|
     action  :create
   end
 end
+
+chef_example_dir 'delete_me' do
+  type    'docker'
+  base    '/data'
+  action  :delete
+end

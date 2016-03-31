@@ -7,7 +7,13 @@ end
 
 action :create do
   if @current_resource.exists
-    Chef::Log.info "#{@new_resource} already exists - nothing to do."
+    if updated?
+      converge_by("Create #{@new_resource}") do
+        create_dir
+      end
+    else
+      Chef::Log.info "#{@new_resource} already exists - nothing to do."
+    end
   else
     converge_by("Create #{@new_resource}") do
       create_dir
@@ -32,6 +38,14 @@ def load_current_resource
   @current_resource.type(@new_resource.type)
 
   @current_resource.exists = ::File.directory?(build_path(@current_resource))
+  @current_resource
+end
+
+def updated?
+  diff = false
+  diff = true if @current_resource.type != @new_resource.type
+  diff = true if @current_resource.base != @new_resource.base
+  diff
 end
 
 def build_path(res)
