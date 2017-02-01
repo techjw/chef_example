@@ -9,23 +9,27 @@ default_action :create
 # data from an actual file/object on the box or a node attribute.
 
 action :create do
-  converge_by "creating #{name}" do
-    directory build_path(new_resource) do
-      owner     'root'
-      group     'root'
-      mode      0755
-      recursive true
-      action    :create
+  if updated?(new_resource)
+    converge_by "creating #{name}" do
+      directory build_path(new_resource) do
+        owner     'root'
+        group     'root'
+        mode      '0755'
+        recursive true
+        action    :create
+      end
     end
-  end if updated?(new_resource)
+  end
 end
 
 action :delete do
-  converge_by "deleting #{name}" do
-    directory build_path(new_resource) do
-      action    :delete
+  if ::File.directory?(build_path(new_resource))
+    converge_by "deleting #{name}" do
+      directory build_path(new_resource) do
+        action    :delete
+      end
     end
-  end if ::File.directory?(build_path(new_resource))
+  end
 end
 
 def build_path(res)
